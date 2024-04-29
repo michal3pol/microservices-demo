@@ -125,3 +125,13 @@ func (fe *frontendServer) getAd(ctx context.Context, ctxKeys []string) ([]*pb.Ad
 	})
 	return resp.GetAds(), errors.Wrap(err, "failed to get ads")
 }
+
+func (fe *frontendServer) getReview(ctx context.Context, ctxKeys []string) ([]*pb.Review, error) {
+	ctx, cancel := context.WithTimeout(ctx, time.Millisecond*100)
+	defer cancel()
+
+	resp, err := pb.NewReviewServiceClient(fe.reviewSvcConn).GetReviews(ctx, &pb.ReviewRequest{
+		ContextKeys: ctxKeys,
+	})
+	return resp.GetReview(), errors.Wrap(err, "failed to get reviews")
+}

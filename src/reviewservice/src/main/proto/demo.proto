@@ -16,8 +16,6 @@ syntax = "proto3";
 
 package hipstershop;
 
-option go_package = "github.com/mf/protos";
-
 // -----------------Cart service-----------------
 
 service CartService {
@@ -261,8 +259,7 @@ message Ad {
     string text = 2;
 }
 
-// ------------Review service------------------
-
+---------------------------REVIEW
 service ReviewService {
     rpc GetReviews(ReviewRequest) returns (ReviewResponse) {}
 }
@@ -283,3 +280,4 @@ message Review {
     // short advertisement text to display.
     string text = 2;
 }
+

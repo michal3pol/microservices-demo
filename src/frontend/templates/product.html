@@ -77,6 +77,10 @@
       {{ template "recommendations" $.recommendations }}
     {{ end }}
   </div>
+  <div>test</div>
+  <div class="review">
+    {{ with $.review }}{{ template "review" . }}{{ end }}
+   </div>
   <div class="ad">
    {{ with $.ad }}{{ template "text_ad" . }}{{ end }}
   </div>

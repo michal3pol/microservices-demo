@@ -291,6 +291,8 @@ spec:
             value: "checkoutservice:5050"
           - name: AD_SERVICE_ADDR
             value: "adservice:9555"
+          - name: REVIEW_SERVICE_ADDR
+            value: "reviewservice:9556"
           # # ENV_PLATFORM: One of: local, gcp, aws, azure, onprem, alibaba
           # # When not set, defaults to "local" unless running in GKE, otherwies auto-sets to gcp
           # - name: ENV_PLATFORM
@@ -860,4 +862,70 @@ spec:
   - name: grpc
     port: 9555
     targetPort: 9555
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reviewservice
+spec:
+  selector:
+    matchLabels:
+      app: reviewservice
+  template:
+    metadata:
+      labels:
+        app: reviewservice
+    spec:
+      serviceAccountName: default
+      terminationGracePeriodSeconds: 5
+      securityContext:
+        fsGroup: 1000
+        runAsGroup: 1000
+        runAsNonRoot: true
+        runAsUser: 1000
+      containers:
+      - name: server
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - ALL
+          privileged: false
+          readOnlyRootFilesystem: true
+        image: gcr.io/google-samples/microservices-demo/reviewservice:v0.9.0
+        ports:
+        - containerPort: 9556
+        env:
+        - name: PORT
+          value: "9556"
+        resources:
+          requests:
+            cpu: 200m
+            memory: 180Mi
+          limits:
+            cpu: 300m
+            memory: 300Mi
+        readinessProbe:
+          initialDelaySeconds: 20
+          periodSeconds: 15
+          grpc:
+            port: 9556
+        livenessProbe:
+          initialDelaySeconds: 20
+          periodSeconds: 15
+          grpc:
+            port: 9556
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: reviewservice
+spec:
+  type: ClusterIP
+  selector:
+    app: reviewservice
+  ports:
+  - name: grpc
+    port: 9556
+    targetPort: 9556
 # [END gke_release_kubernetes_manifests_microservices_demo]
