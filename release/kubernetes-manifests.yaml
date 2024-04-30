@@ -255,7 +255,7 @@ spec:
                 - ALL
             privileged: false
             readOnlyRootFilesystem: true
-          image: gcr.io/google-samples/microservices-demo/frontend:v0.9.0
+          image: michal3pol/frontend
           ports:
           - containerPort: 8080
           readinessProbe:
