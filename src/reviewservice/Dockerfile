@@ -23,7 +23,7 @@ RUN ./gradlew downloadRepos
 
 COPY . .
 RUN chmod +x gradlew
-RUN ./gradlew installDist
+RUN ./gradlew installDist --warning-mode=all
 
 FROM eclipse-temurin:21.0.2_13-jre-alpine@sha256:fb4150a30569aadae9d693d949684a00653411528e62498b9900940c9b5b8a66
 
@@ -39,4 +39,4 @@ WORKDIR /app
 COPY --from=builder /app .
 
 EXPOSE 9556
-ENTRYPOINT ["/app/build/install/hipstershop/bin/AdService"]
+ENTRYPOINT ["/app/build/install/hipstershop/bin/ReviewService"]

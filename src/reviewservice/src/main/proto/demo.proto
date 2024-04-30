@@ -259,7 +259,7 @@ message Ad {
     string text = 2;
 }
 
----------------------------REVIEW
+// ---------------------------REVIEW
 service ReviewService {
     rpc GetReviews(ReviewRequest) returns (ReviewResponse) {}
 }

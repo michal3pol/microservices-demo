@@ -892,7 +892,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: gcr.io/google-samples/microservices-demo/reviewservice:v0.9.0
+        image: michal3pol/reviewservice
         ports:
         - containerPort: 9556
         env:
