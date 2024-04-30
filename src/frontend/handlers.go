@@ -113,6 +113,7 @@ func (fe *frontendServer) homeHandler(w http.ResponseWriter, r *http.Request) {
 		"cart_size":         cartSize(cart),
 		"banner_color":      os.Getenv("BANNER_COLOR"), // illustrates canary deployments
 		"ad":                fe.chooseAd(r.Context(), []string{}, log),
+		"review":            fe.chooseReview(r.Context(), []string{}, log),
 		"platform_css":      plat.css,
 		"platform_name":     plat.provider,
 		"is_cymbal_brand":   isCymbalBrand,
@@ -203,6 +204,7 @@ func (fe *frontendServer) productHandler(w http.ResponseWriter, r *http.Request)
 		"session_id":        sessionID(r),
 		"request_id":        r.Context().Value(ctxKeyRequestID{}),
 		"ad":                fe.chooseAd(r.Context(), p.Categories, log),
+		"review":            fe.chooseReview(r.Context(), p.Categories, log),
 		"user_currency":     currentCurrency(r),
 		"show_currency":     true,
 		"currencies":        currencies,
@@ -449,6 +451,15 @@ func (fe *frontendServer) chooseAd(ctx context.Context, ctxKeys []string, log lo
 		return nil
 	}
 	return ads[rand.Intn(len(ads))]
+}
+
+func (fe *frontendServer) chooseReview(ctx context.Context, ctxKeys []string, log logrus.FieldLogger) *pb.Review {
+	revs, err := fe.getReview(ctx, ctxKeys)
+	if err != nil {
+		log.WithField("error", err).Warn("failed to retrieve reviews")
+		return nil
+	}
+	return revs[rand.Intn(len(revs))]
 }
 
 func renderHTTPError(log logrus.FieldLogger, r *http.Request, w http.ResponseWriter, err error, code int) {

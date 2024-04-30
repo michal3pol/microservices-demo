@@ -149,38 +149,38 @@ public final class ReviewService {
   private static ImmutableListMultimap<String, Review> createReviewsMap() {
     Review hairdryer =
         Review.newBuilder()
-            .setRedirectUrl("/product/2ZYFJ3GM2N")
-            .setText("Hairdryer FORFOR sale. 50% off.")
+            .setRedirectUrl("/home")
+            .setText("Nice product.")
             .build();
     Review tankTop =
         Review.newBuilder()
-            .setRedirectUrl("/product/66VCHSJNUP")
-            .setText("Tank top FORFOR sale. 20% off.")
+            .setRedirectUrl("/home")
+            .setText("Bad product.")
             .build();
     Review candleHolder =
         Review.newBuilder()
-            .setRedirectUrl("/product/0PUK6V6EV0")
-            .setText("Candle holder FORFOR sale. 30% off.")
+            .setRedirectUrl("/home")
+            .setText("Nice Candle holder!")
             .build();
     Review bambooGlassJar =
         Review.newBuilder()
-            .setRedirectUrl("/product/9SIQT8TOJO")
-            .setText("Bamboo glass jar FORFOR sale. 10% off.")
+            .setRedirectUrl("/home")
+            .setText("Nice glass.")
             .build();
     Review watch =
         Review.newBuilder()
-            .setRedirectUrl("/product/1YMWWN1N4O")
-            .setText("Watch FORFOR sale. Buy one, get second kit for free")
+            .setRedirectUrl("/home")
+            .setText("Now I know the time")
             .build();
     Review mug =
         Review.newBuilder()
-            .setRedirectUrl("/product/6E92ZMYYFZ")
-            .setText("Mug FORFOR sale. Buy two, get third one for free")
+            .setRedirectUrl("/home")
+            .setText("Coffee from this mug is bad...")
             .build();
     Review loafers =
         Review.newBuilder()
-            .setRedirectUrl("/product/L9ECAV7KIM")
-            .setText("Loafers FORFOR sale. Buy one, get second one for free")
+            .setRedirectUrl("/home")
+            .setText("ok")
             .build();
     return ImmutableListMultimap.<String, Review>builder()
         .putAll("clothing", tankTop)
