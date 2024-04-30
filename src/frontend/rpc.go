@@ -133,5 +133,5 @@ func (fe *frontendServer) getReview(ctx context.Context, ctxKeys []string) ([]*p
 	resp, err := pb.NewReviewServiceClient(fe.reviewSvcConn).GetReviews(ctx, &pb.ReviewRequest{
 		ContextKeys: ctxKeys,
 	})
-	return resp.GetReview(), errors.Wrap(err, "failed to get reviews")
+	return resp.GetReviews(), errors.Wrap(err, "failed to get reviews")
 }
